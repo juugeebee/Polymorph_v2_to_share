@@ -96,4 +96,4 @@ Il contient les champs suivants:
 10. dist_to_3'_end
 
 La dernière base en 3' du primer est considérée comme ayant une distance de 1 par rapport à l'extrémité 3'.
-Dans le cas des indels, nous indiquons la distance la plus proximale de l'extrémité 3' ainsi que la distance la plus distale de l'extrémité 3'. En cas d’indel partiellement comprise dans la séquence du primer, seules les bases communes sont mentionnées.l'enregistrer dans le répertoire souhaité.
+Dans le cas des indels, nous indiquons la distance la plus proximale de l'extrémité 3' ainsi que la distance la plus distale de l'extrémité 3'. En cas d’indel partiellement comprise dans la séquence du primer, seules les bases communes sont mentionnées.
