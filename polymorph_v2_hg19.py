@@ -126,7 +126,7 @@ for fi in os.listdir(pathfolder):
 
 	print("\n--> In-Silico PCR.")
 
-	subprocess.call("isPcr ~/SCRIPTS/Polymorph_v2/db/hg19/seq_hg19.fa ./data/ispcr_input.txt \
+	subprocess.call("isPcr seq ./data/ispcr_input.txt \
         -out=bed ./data/ispcr_output.bed", shell="/bin/bash")
 	print('ok')
 
@@ -221,7 +221,7 @@ for fi in os.listdir(pathfolder):
 		for record in fetch:
 			vcf_writer.write_record(record)
 
-	variants_exomes = functions.read_vcf('/home/jbogoin/SCRIPTS/Polymorph_v2/gnomad_exomes_fetch.vcf')
+	variants_exomes = functions.read_vcf('gnomad_exomes_fetch.vcf')
 
 	info_split = variants_exomes['INFO'].str.split(pat=';', n=3, expand=True)
 	variants_exomes['AC_e'] = info_split[0].str.replace('AC=','')
@@ -247,7 +247,7 @@ for fi in os.listdir(pathfolder):
 		for record in fetch:
 			vcf_writer.write_record(record)
 
-	variants_genomes = functions.read_vcf('/home/jbogoin/SCRIPTS/Polymorph_v2/gnomad_genomes_fetch.vcf')
+	variants_genomes = functions.read_vcf('gnomad_genomes_fetch.vcf')
 
 	info_split = variants_genomes['INFO'].str.split(pat=';', n=3, expand=True)
 	variants_genomes['AC_g'] = info_split[0].str.replace('AC=','')
