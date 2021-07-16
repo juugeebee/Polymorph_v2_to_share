@@ -126,7 +126,7 @@ for fi in os.listdir(pathfolder):
 
 	print("\n--> In-Silico PCR.")
 
-	subprocess.call("isPcr seq ./data/ispcr_input.txt \
+	subprocess.call("isPcr +seq+ ./data/ispcr_input.txt \
         -out=bed ./data/ispcr_output.bed", shell="/bin/bash")
 	print('ok')
 
