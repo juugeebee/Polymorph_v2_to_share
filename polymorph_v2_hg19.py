@@ -393,13 +393,6 @@ for fi in os.listdir(pathfolder):
 	final['REF'] = final['REF'].astype(str)
 	final['ALT'] = final['ALT'].astype(str)
 
-	hyperlink = pandas.DataFrame()
-
-	hyperlink['gnomAD_hyperlink'] = 'https://gnomad.broadinstitute.org/variant/' \
-	    + final['CHROM_x'] + '-' + final['dbSNP_position'] + '-' \
-	    + final['REF'] + '-' + final['ALT'] + hl_version
-
-	hl_list = hyperlink['gnomAD_hyperlink'].tolist()
 	final['Freq_gnomAD'] = final['Freq_gnomAD'].astype(str)
 	freq_list = final['Freq_gnomAD'].tolist()
 
@@ -416,6 +409,15 @@ for fi in os.listdir(pathfolder):
 	    'Biologiste', 'Date']]
 
 	final.drop_duplicates(keep = 'first', inplace=True)
+
+	# Creation dataframe des hyperlinks vers l'interface gnomad
+	hyperlink = pandas.DataFrame()
+
+	hyperlink['gnomAD_hyperlink'] = 'https://gnomad.broadinstitute.org/variant/' \
+	    + final['Contig'] + '-' + final['dbSNP_position'] + '-' \
+	    + final['REF'] + '-' + final['ALT'] + hl_version
+
+	hl_list = hyperlink['gnomAD_hyperlink'].tolist()
 
 	final.to_csv('./data/polymorph_final.csv', index=False)
 
