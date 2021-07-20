@@ -10,11 +10,18 @@ Julie Bogoin, juin 2021.
 ./input/
 ./data/
 
-2. Fichiers nécessaires au bon fonctionnement du script. Les chemins sont à renseigner dans le fichier db_location.py 
+2. Fichiers nécessaires au bon fonctionnement du script. 
+
+Les chemins absolus sont à renseigner dans le fichier db_location.py 
 
 guniq : liste des gènes hg19 au format texte (.txt)
+	le format attendu est chromosome\tstrand\tgene\n
+	source préconisée: USCS / Table Browser
+
 seq : séquence de référence au format fasta (.fa)
+
 gnex : fichier gnomAD exomes 2.1.1 au format .sites.vcf.bgz
+
 gnge : fichier gnomAD genomes 2.1.1 au format .sites.vcf.bgz
 
 3. Utilisation du fichier .yml pour créer un environnement conda contenant les bibliothèques necessaires.
