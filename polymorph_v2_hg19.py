@@ -59,6 +59,7 @@ for fi in os.listdir(pathfolder):
 		index = index + 1
 
 	df['gene'] = pandas.Series(gene_name_list, dtype=str)
+	
 	print('ok')
 
 	print("\n--> Suppression des lignes #gènes.")
@@ -126,7 +127,7 @@ for fi in os.listdir(pathfolder):
 
 	print("\n--> In-Silico PCR.")
 
-	subprocess.call("isPcr +seq+ ./data/ispcr_input.txt \
+	subprocess.call("isPcr " + seq + " ./data/ispcr_input.txt \
         -out=bed ./data/ispcr_output.bed", shell="/bin/bash")
 	print('ok')
 
@@ -355,7 +356,7 @@ for fi in os.listdir(pathfolder):
 	# Distance à l'amorce
 	polymorph['end'] = polymorph['end'].astype(int)
 	polymorph['POS_x'] = polymorph['POS_x'].astype(int)
-	# polymorph['Freq_gnomAD'] = polymorph['Freq_gnomAD'].astype(float)
+	polymorph['Freq_gnomAD'] = polymorph['Freq_gnomAD'].astype(float)
 
 	polymorph['Freq_gnomAD'] = pandas.to_numeric(polymorph['Freq_gnomAD'],errors='coerce')
 
@@ -379,14 +380,22 @@ for fi in os.listdir(pathfolder):
 
 	polymorph.columns = cols    
 
-	noms_genes = df[['gene', 'name_F', 'name_R']]
+	# dataframe association nom de gene, nom de primer
+	noms_genes_F = df[['gene', 'name_F']]
+	cols = ['gene', 'primer']
+	noms_genes_F.columns = cols
+	
+	noms_genes_R = df[['gene', 'name_R']]
+	cols = ['gene', 'primer']
+	noms_genes_R.columns = cols
+
+	noms_genes = pandas.concat([noms_genes_F, noms_genes_R])
 
 	final = pandas.merge(polymorph, noms_genes, \
-	    left_on='Primer_name', right_on='name_F', how='inner', sort=True, \
+	    left_on='Primer_name', right_on='primer', how='inner', sort=True, \
 	    suffixes=(False, False))
 
-	del final['name_F']
-	del final['name_R']
+	del final['primer']
 
 	final['CHROM_x'] = final['CHROM_x'].astype(str)
 	final['dbSNP_position'] = final['dbSNP_position'].astype(str)
